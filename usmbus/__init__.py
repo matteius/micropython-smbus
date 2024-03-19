@@ -60,9 +60,13 @@ class SMBus(I2C):
         """ Not yet implemented """
         raise RuntimeError("Not yet implemented")
 
-    def read_word_data(self, *args, **kwargs):
-        """ Not yet implemented """
-        raise RuntimeError("Not yet implemented")
+    def read_word_data(self, addr, register) -> int:
+        """ Read a single word (2 bytes) from a given register;
+            little-endian decode that word as int
+            Returns int
+        """
+        
+        return int.from_bytes(self.i2c.readfrom_mem(addr, register, 2), 'little')
 
     def write_word_data(self, *args, **kwargs):
         """ Not yet implemented """
